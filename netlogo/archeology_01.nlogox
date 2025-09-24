@@ -4,26 +4,7 @@
 
 breed [nodes node]
 undirected-link-breed [edges edge]
-nodes-own [pots
-  distance-from-other-turtles ; list of distances of this node from other turtles
-  my-clustering-coefficient   ; the current clustering coefficient of this node
-]
-
-globals [
-  infinity         ; used to represent the distance between two turtles with no path between them
-  highlight-string ; message that appears on the node properties monitor
-
-  average-path-length-of-lattice       ; average path length of the initial lattice
-  average-path-length                  ; average path length in the current network
-
-  clustering-coefficient-of-lattice    ; the clustering coefficient of the initial lattice
-  clustering-coefficient               ; the clustering coefficient of the current network (avg. across nodes)
-
-  number-rewired                       ; number of edges that have been rewired
-  rewire-one?                          ; these two variables record which button was last pushed
-  rewire-all?
-]
-
+nodes-own [pots]
 
 
 to setup
@@ -82,21 +63,6 @@ to trade
       ]
     ]
   ]
-  ask nodes [set size .1 + pots / 50]
-end
-
-
-
-to highlight
-  ; remove any previous highlights
-  ask turtles [ set color gray + 2 ]
-  ask links   [ set color gray + 2 ]
-
-  ; if the mouse is in the View, go ahead and highlight
-  ;if mouse-inside? [ do-highlight ]
-
-  ; force updates since we don't use ticks
-  display
 end
 
 ]]></code>
@@ -134,7 +100,6 @@ set-plot-x-range 0 (max-pots + 1)
 histogram [pots] of nodes</update>
       </pen>
     </plot>
-    <monitor x="35" precision="2" y="480" height="60" fontSize="11" width="100">nw:betweenness-centrality</monitor>
   </widgets>
   <info>## WHAT IS IT?
 
